@@ -1,7 +1,13 @@
 <div class="row">
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <p style="color: red;"><%= error %></p>
+    <% end %>
+  <% end %>
   <div class="col l6 m6 s6">
     <h1>Register</h1>
     <form action="/users/create" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">  
       <label for="first_name">First Name</label>
       <input type="text" name="first_name">
       <label for="last_name">Last Name</label>
@@ -16,6 +22,7 @@
   <div class="col l6 m6 s6">
     <h1>Login</h1>
     <form action="/login" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       <label for="email">Email</label>
       <input type="text" name="email">
       <label for="password">Password</label>

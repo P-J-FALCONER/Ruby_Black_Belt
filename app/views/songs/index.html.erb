@@ -1,3 +1,5 @@
+<h1>All The Songs in Our Hub</h1>
+<a href="/logout" data-method="post">Logout</a>
 <table>
   <thead>
     <th>Artist</th>
@@ -11,8 +13,17 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td><button>Add</button></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<form>
+  <h3>Add a Song</h3>
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">  
+  <label for="name">Song Name</label>
+  <input type="text" name="name">
+  <label for="artist">Artist</label>
+  <input type="text" name="artist">
+  <input type="submit" value="Create Song">
+</form>
