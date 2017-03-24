@@ -1,0 +1,18 @@
+<h3>Others Who Have Added <span style="text-decoration: underline;"><%= @song.artist %> - <%= @song.title %></span></h3>
+<h5><a href="/">Dashboard</a></h5>
+<h5><a href="/logout" data-method="post">Logout</a></h5>
+
+<table class="striped centered">
+  <thead>
+    <th>Name</th>
+    <th>Times Added</th>
+  </head>
+  <tbody>
+    <% @users.each do |user|%>
+      <tr>
+        <td><a href="/users/<%= user.user_id %>"><%= user.user.first_name %> <%= user.user.last_name %></a></td>
+        <td><%= @counts[user.user_id] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

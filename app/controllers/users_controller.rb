@@ -14,6 +14,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @songs = Playlist.where(user_id:params[:id]).select(:song_id).distinct
+    @count = {}
+    @songs.each do |song|
+      scount = Playlist.where(song_id:song.song_id, user_id:params[:id]).count
+      @count[song.song_id] = scount
+    end
+  end
+
   def login
     user = User.find_by_email(params[:email])
     if user

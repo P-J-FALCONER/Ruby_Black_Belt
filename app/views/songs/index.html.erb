@@ -1,6 +1,6 @@
 <h1>All The Songs in Our Hub</h1>
 <a href="/logout" data-method="post">Logout</a>
-<table>
+<table class="striped centered">
   <thead>
     <th>Artist</th>
     <th>Song Title</th>
@@ -8,21 +8,26 @@
     <th>Add to Playlist</th>
   </head>
   <tbody>
-    <% if true %>
+    <% @songs.each do |song| %>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button>Add</button></td>
+        <td><%= song.artist %></td>
+        <td><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
+        <td><%= @counts[song.id] %></td>
+        <td><a href="/playlists/<%= song.id %>" data-method="post">Add</a></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<form>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <p style="color: red;"><%= error %></p>
+  <% end %>
+<% end %>
+<form method="post" action="/songs/create">
   <h3>Add a Song</h3>
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">  
-  <label for="name">Song Name</label>
-  <input type="text" name="name">
+  <label for="title">Song Title</label>
+  <input type="text" name="title">
   <label for="artist">Artist</label>
   <input type="text" name="artist">
   <input type="submit" value="Create Song">
